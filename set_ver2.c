@@ -158,5 +158,8 @@ int main (void){
     intersect(&A, &B);
     belongs_to(A, 4);
     belongs_to(B, 2);
+
+    free_set(&A);
+    free_set(&B);
     return 0;
 }
