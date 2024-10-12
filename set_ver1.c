@@ -31,7 +31,6 @@ void add_to_set (multime_t m, int val){
 }
 
 void remove_from_set (multime_t m, int val){
-
     int poz = -1;
     for (int i = 0; i < m->n; i++)
         if (m->v[i] == val){
@@ -127,5 +126,8 @@ int main (void){
     belongs_to(A, 23);
     belongs_to(B, 11);
     
+
+    free(A.v);
+    free(B.v);
     return 0;
 }
