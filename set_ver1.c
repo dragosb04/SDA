@@ -12,7 +12,7 @@ int cmp (const void* a, const void* b){
     return (*(int*)a - *(int*) b);
 }
 
-void init (set_t m){
+void init(set_t m){
     m->n = 0;
     if (m->v != NULL) {
         free(m->v);
