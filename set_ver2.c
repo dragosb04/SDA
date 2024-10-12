@@ -9,6 +9,16 @@ typedef struct nod {
 typedef node* set;
 typedef set* set_t;
 
+void free_set(set_t var){
+    set p = *var;
+    set temp;
+    while (p != NULL){
+        temp = p;
+        p = p->next;
+        free(temp);
+    }
+}
+
 void init (set_t var){
     if (*var != NULL){
         set p = *var;
