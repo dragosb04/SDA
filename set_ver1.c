@@ -4,14 +4,15 @@
 typedef struct {
     int *v;
     int n;
-} multime;
+} set;
 
-typedef multime* multime_t;
+typedef set* set_t;
 
 int cmp (const void* a, const void* b){
     return (*(int*)a - *(int*) b);
 }
-void init (multime_t m){
+
+void init (set_t m){
     m->n = 0;
     if (m->v != NULL) {
         free(m->v);
@@ -19,7 +20,7 @@ void init (multime_t m){
     m->v = NULL;
 }
 
-void add_to_set (multime_t m, int val){
+void add_to_set (set_t m, int val){
     
     for (int i = 0; i < m->n; i++)
         if (m->v[i] == val)
@@ -30,7 +31,7 @@ void add_to_set (multime_t m, int val){
     (m->v)[m->n - 1] = val;
 }
 
-void remove_from_set (multime_t m, int val){
+void remove_from_set (set_t m, int val){
     int poz = -1;
     for (int i = 0; i < m->n; i++)
         if (m->v[i] == val){
@@ -50,9 +51,9 @@ void remove_from_set (multime_t m, int val){
     (m->n)--;
 }
 
-void print_set(multime m){
+void print_set(set m){
     if (m.n == 0){
-        printf("Multimea nu are valori.\n");
+        printf("seta nu are valori.\n");
         return;
     }
 
@@ -62,7 +63,7 @@ void print_set(multime m){
     printf("\n");
 }
 
-void intersect(multime a, multime b){
+void intersect(set a, set b){
     qsort(a.v, a.n, sizeof(int), cmp);
     qsort(b.v, b.n, sizeof(int), cmp);
 
@@ -82,7 +83,7 @@ void intersect(multime a, multime b){
     printf("\n");
 }
 
-void belongs_to (multime a, int nr){
+void belongs_to (set a, int nr){
     int poz = -1;
 
     for (int i = 0; i < a.n; i++){
@@ -100,7 +101,7 @@ void belongs_to (multime a, int nr){
 
 int main (void){
 
-    multime A, B;
+    set A, B;
     A.v = NULL;
     B.v = NULL;
 
