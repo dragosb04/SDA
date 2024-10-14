@@ -53,11 +53,10 @@ void remove_from_set (set_t m, int val){
 
 void print_set(set m){
     if (m.n == 0){
-        printf("seta nu are valori.\n");
+        printf("Multimea nu are valori.\n");
         return;
     }
 
-    printf("Valori: ");
     for (int i = 0; i < m.n; i++)
         printf("%d ", m.v[i]);
     printf("\n");
@@ -79,6 +78,40 @@ void intersect(set a, set b){
             i++;
             j++;
         }
+    }
+    printf("\n");
+}
+
+void reunite (set a, set b){
+    qsort(a.v, a.n, sizeof(int), cmp);
+    qsort(b.v, b.n, sizeof(int), cmp); 
+
+    int i = 0, j = 0;
+    printf("Reuniune: ");
+    while (i < a.n && j < b.n){
+        if (a.v[i] < b.v[j]){
+            printf("%d ", a.v[i]);
+            i++;
+        }
+        else if (a.v[i] > b.v[j]) {
+            printf("%d ", b.v[j]);
+            j++;
+        }
+        else{
+            printf("%d ", a.v[i]);
+            i++;
+            j++;
+        }
+    }
+
+    while (i < a.n) {
+        printf("%d ", a.v[i]);
+        i++;
+    }
+
+    while (j < b.n) {
+        printf("%d ", b.v[j]);
+        j++;
     }
     printf("\n");
 }
@@ -126,8 +159,26 @@ int main (void){
     intersect(A, B);
     belongs_to(A, 23);
     belongs_to(B, 11);
-    
 
+
+    init(&A);
+    init(&B);
+    add_to_set(&A, 2);
+    add_to_set(&A, 5);
+    add_to_set(&A, 9);
+    add_to_set(&A, 11);
+    add_to_set(&A, 7);
+
+    add_to_set(&B, 5);
+    add_to_set(&B, 11);
+    add_to_set(&B, 7);
+    add_to_set(&B, 23);
+    add_to_set(&B, 34);
+    add_to_set(&B, 17);
+
+    print_set(A);
+    print_set(B);
+    reunite(A, B);    
     free(A.v);
     free(B.v);
     return 0;

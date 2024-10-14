@@ -20,15 +20,8 @@ void free_set(set_t var){
 }
 
 void init (set_t var){
-    if (*var != NULL){
-        set p = *var;
-        set temp;
-        while (p != NULL){
-            temp = p;
-            p = p->next;
-            free(temp);
-        }
-    }
+    if (*var != NULL)
+        free_set(var);
     *var = NULL;
 }
 
@@ -89,7 +82,7 @@ void remove_from_set (set_t var, int val){
 
 void print_set (set var){
     set p = var;
-    printf("Valori: ");
+
     while (p != NULL){
         printf("%d ", p->value);
         p = p->next;
@@ -116,6 +109,27 @@ void intersect(set_t var1, set_t var2) {
         p1 = p1->next;
     }
     printf("\n");
+}
+
+void reunite (set var1, set var2){
+    set p = var1;
+    set result = NULL;
+
+    printf("Reuniune: ");
+    while (p != NULL){
+        add_to_set(&result, p->value);
+        p = p->next;
+    }
+
+    p = var2;
+
+    while (p != NULL){
+        add_to_set(&result, p->value);
+        p = p->next;
+    }
+
+    print_set(result);
+    free_set(&result);
 }
 
 void belongs_to(set var, int val) {
@@ -151,6 +165,7 @@ int main (void){
     add_to_set(&B, 1);
     add_to_set(&B, 7);
     add_to_set(&B, 2);
+    add_to_set(&B, 3);
 
     print_set(A);
     print_set(B);
@@ -159,6 +174,11 @@ int main (void){
     belongs_to(A, 4);
     belongs_to(B, 2);
 
+
+    print_set(A);
+    print_set(B);
+
+    reunite(A, B);
     free_set(&A);
     free_set(&B);
     return 0;
